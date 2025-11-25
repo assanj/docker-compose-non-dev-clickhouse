@@ -1,0 +1,50 @@
+
+services:
+  redis:
+    image: redis:7
+    container_name: superset_cache
+
+  db:
+    image: postgres:16
+    container_name: superset_db
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U superset"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  superset:
+    image: assanj/superset-app:latest2025Nov 
+    container_name: superset_app
+    environment:
+      SUPERSET_SECRET_KEY: your-secret-key-here
+      
+      SUPERSET_ADMIN_USERNAME: admin
+      SUPERSET_ADMIN_PASSWORD: 123
+      SUPERSET_ADMIN_EMAIL: admin@example.com
+      SUPERSET_LOAD_EXAMPLES: "no"
+      
+      DATABASE_DB: superset
+      DATABASE_USER: superset
+      DATABASE_PASSWORD: superset
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      REDIS_HOST: redis
+    ports:
+      - "8088:8088"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        superset db upgrade &&
+        superset init &&
+        superset run -p 8088 --with-threads --reload --debugger --host=0.0.0.0
+      "
+
+volumes:
+  db_data:
