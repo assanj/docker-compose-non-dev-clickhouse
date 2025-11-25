@@ -5,4 +5,4 @@ docker-compose-simple.yml
 
 like here:
 https://superset.apache.org/docs/configuration/databases/#clickhouse
-build by docker-compose-non-dev.yml
+build by docker-compose-non-dev.yml (latest november 2025)
