@@ -1,6 +1,6 @@
 https://hub.docker.com/repositories/assanj
 +
-docker-compose-simple.yml
+[docker-compose-simple.yml](https://github.com/assanj/docker-compose-non-dev-clickhouse/blob/main/docker-compose-simple.yml)
 = Apache Superset + clickhouse-connect Python library
 
 like here:
