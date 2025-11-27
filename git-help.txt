@@ -1,4 +1,9 @@
 БАЗА:
+Меняет/устанавливает адрес удаленного репозитория с SSH на HTTPS:
+git remote set-url origin https://github.com/assanj/docker-compose-non-dev-clickhouse.git
+Использовать Personal Access Token:
+git config --global credential.helper store # 
+
 git add .
 git commit -m "add git help"
 git push origin main
@@ -13,7 +18,10 @@ git pull origin main && git status && git push origin main || echo "Sync failed!
     || echo "Sync failed!" - если синхронизация не удалась
     
 git pull origin main && git add . && git commit -m "sync update" && git status && git push origin main || echo "Full sync failed!"
-Для полного цикла синхронизации (пулл + коммит + пуш):
+Для полного цикла синхронизации (пулл + коммит + пуш)
+Или проще:
+git pull origin main
+git push origin main
 
 git status
 # Должно быть: "working tree clean"
@@ -137,4 +145,29 @@ git log --oneline -3
 ⚠️  git push -f МОЖЕТ УДАЛИТЬ ЧУЖУЮ РАБОТУ!
 Используйте только когда уверены на 100%.
 
-ТЕПЕРЬ ВАШ GITHUB СИНХРОНИЗИРОВАН С ЛОКАЛЬНОЙ ВЕРСИЕЙ! 🎉
+
+==========================================================================
+SSH НАСТРОЙКА ДЛЯ GITHUB
+
+1. СОЗДАТЬ КЛЮЧ:
+ssh-keygen -t ed25519 -C "ваш_email@github.com"
+(на все вопросы жмем Enter)
+
+2. ПОСМОТРЕТЬ КЛЮЧ:
+cat ~/.ssh/id_ed25519.pub
+
+3. ДОБАВИТЬ НА GITHUB:
+- Зайти на https://github.com/settings/keys
+- New SSH Key
+- Вставить ключ из п.2
+- Добавить
+
+4. ПЕРЕКЛЮЧИТЬ РЕПОЗИТОРИЙ:
+cd ~/superset-prod
+git remote set-url origin git@github.com:assanj/docker-compose-non-dev-clickhouse.git
+
+5. ПРОВЕРИТЬ:
+git push origin main
+(больше не спросит пароль!)
+
+
