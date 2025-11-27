@@ -1,6 +1,6 @@
 # Docker
-docker/.env
-docker/.env-local
+#docker/.env
+#docker/.env-local
 
 # Volumes
 superset_home/
