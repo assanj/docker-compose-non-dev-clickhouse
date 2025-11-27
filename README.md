@@ -43,11 +43,52 @@ https://superset.apache.org/docs/configuration/databases/#clickhouse
 
 2. Configure Environment
    nano docker/.env
+   ENVIRONMENT CONFIGURATION INSTRUCTIONS
 
-3. Deploy
+STEP 1: NAVIGATE TO PROJECT DIRECTORY
+cd ~/superset-prod
+
+STEP 2: CREATE ENVIRONMENT FILE & CONFIGURE ENVIRONMENT VARIABLES
+nano docker/.env
+
+Copy and paste this configuration into the editor:
+
+# POSTGRESQL DATABASE CONFIGURATION
+POSTGRES_PASSWORD=superset                    # PostgreSQL admin password
+DATABASE_DB=superset                          # Database name for Superset
+DATABASE_USER=superset                        # Database username
+DATABASE_PASSWORD=superset                    # Database password
+DATABASE_HOST=db                              # Database container name
+DATABASE_PORT=5432                            # PostgreSQL port
+
+# REDIS CACHE CONFIGURATION
+REDIS_PASSWORD=superset                       # Redis password
+REDIS_HOST=redis                              # Redis container name
+
+# SUPERSET SECURITY CONFIGURATION
+SECRET_KEY=change-this-to-very-secure-random-key-123  # CHANGE THIS - generate secure key!
+
+# APPLICATION SETTINGS
+SUPERSET_LOAD_EXAMPLES=no                     # Load example data (yes/no)
+
+SAVE THE FILE
+- Press Ctrl+X
+- Press Y to confirm
+- Press Enter to save
+
+IMPORTANT: PASSWORD PRIORITY
+- If .env file exists: PASSWORDS FROM .env FILE WILL BE USED
+- If .env file missing: PASSWORDS FROM docker-compose.yml WILL BE USED
+- .env file OVERRIDES docker-compose.yml settings
+
+VERIFY CONFIGURATION
+docker compose -f docker-compose-non-dev-clickhouse.yml config
+Expected: Should show configuration without errors
+
+STEP 4. Deploy
    docker compose -f docker-compose-non-dev-clickhouse.yml up -d
 
-4. Access
+STEP 5. Access
    URL: http://localhost:8088
    Login: admin / admin
 
