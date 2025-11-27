@@ -7,7 +7,7 @@ git config --global credential.helper store #
 git add .
 git commit -m "add git help"
 git push origin main
-#ли:
+#или:
 git add . && git commit -m "add git help" && git status && git push origin main || echo "Push failed!"
 
 git pull origin main && git status && git push origin main || echo "Sync failed!"
