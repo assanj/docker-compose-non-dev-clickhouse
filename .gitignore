@@ -1,0 +1,24 @@
+# Docker
+docker/.env
+docker/.env-local
+
+# Volumes
+superset_home/
+db_home/
+redis/
+
+# Логи
+*.log
+logs/
+
+# Временные файлы
+tmp/
+temp/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
