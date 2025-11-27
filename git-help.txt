@@ -2,8 +2,18 @@
 git add .
 git commit -m "add git help"
 git push origin main
+#ли:
+git add . && git commit -m "add git help" && git status && git push origin main || echo "Push failed!"
 
-git add . && git commit -m "add git help" && git push origin main || echo "Push failed!"
+git pull origin main && git status && git push origin main || echo "Sync failed!"
+#Эта команда делает:
+    git pull origin main - тянет изменения с GitHub
+    git status - показывает статус (что изменилось)
+    git push origin main - пушит обратно (если есть локальные изменения)
+    || echo "Sync failed!" - если синхронизация не удалась
+    
+git pull origin main && git add . && git commit -m "sync update" && git status && git push origin main || echo "Full sync failed!"
+Для полного цикла синхронизации (пулл + коммит + пуш):
 
 git status
 # Должно быть: "working tree clean"
